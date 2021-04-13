@@ -1,7 +1,7 @@
 CREATE OR REPLACE PACKAGE zt_word AS
 /******************************************************************************
     Author:     Zoran Tica
-                ZT-TECH, racunalniöke storitve s.p.
+                ZT-TECH, racunalni≈°ke storitve s.p.
                 http://www.zt-tech.eu
     
     PURPOSE:    A package for Microsoft Word DOCX documents generation 
@@ -50,6 +50,8 @@ TYPE r_font IS RECORD (
     bold boolean,
     italic boolean,
     underline boolean,
+    superscript boolean,
+    subscript boolean,
     color varchar2(6)
     );
 
@@ -341,6 +343,8 @@ FUNCTION f_font(
     p_bold boolean default false,
     p_italic boolean default false,
     p_underline boolean default false,
+    p_superscript boolean default false,
+    p_subscript boolean default false,
     p_color varchar2 default '000000'  --RRGGBB hex format
     ) RETURN r_font;
 
