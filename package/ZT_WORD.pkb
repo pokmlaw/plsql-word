@@ -597,6 +597,8 @@ FUNCTION f_font(
     p_bold boolean default false,
     p_italic boolean default false,
     p_underline boolean default false,
+    p_superscript boolean default false,
+    p_subscript boolean default false,
     p_color varchar2 default '000000') RETURN r_font IS
 
     lrFont r_font;
@@ -608,6 +610,8 @@ BEGIN
     lrFont.bold := p_bold;
     lrFont.italic := p_italic;
     lrFont.underline := p_underline;
+    lrFont.superscript := p_superscript;
+    lrFont.subscript := p_subscript;
     lrFont.color := p_color;
     
     RETURN lrFont;
@@ -2225,7 +2229,13 @@ BEGIN
             if p_text.font.underline then
                 p_add_clob_text('<w:u w:val="single"/>');
             end if;
-
+            
+            if p_text.font.superscript then
+                p_add_clob_text('<w:vertAlign w:val="superscript" />');
+            elsif p_text.font.subscript then
+                p_add_clob_text('<w:vertAlign w:val="subscript" />');
+            end if;
+						       
             p_add_clob_text('</w:rPr>');
             
         end if;
